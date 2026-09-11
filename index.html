@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Company | User Management - Edit Users</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ===== TOP NAV ===== -->
+<nav class="topnav sticky-top">
+  <div class="d-flex align-items-center px-3" style="height:57px;">
+    <button class="btn btn-sm btn-light d-lg-none me-2" id="sidebarToggle" aria-label="Toggle menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <div class="d-flex align-items-center gap-2 me-4">
+      <div class="brand-logo"></div>
+      <span class="brand-name d-none d-sm-inline">Company</span>
+    </div>
+    <div class="d-none d-lg-flex align-items-center flex-grow-1 overflow-auto nav-links">
+      <a href="#" class="nav-link active-pill">Home</a>
+      <a href="#" class="nav-link">Leads onDemand</a>
+      <a href="#" class="nav-link">Sales onDemand</a>
+      <a href="#" class="nav-link">Content onDemand</a>
+      <a href="#" class="nav-link">Support onDemand</a>
+      <a href="#" class="nav-link">Reports onDemand</a>
+      <a href="#" class="nav-link">Module 8</a>
+      <a href="#" class="nav-link">Module 9</a>
+    </div>
+    <div class="ms-auto d-flex align-items-center gap-3">
+      <button class="btn btn-sm btn-light rounded-circle" style="width:34px;height:34px;" aria-label="Search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+      <div class="dropdown">
+        <a class="d-flex align-items-center gap-2 text-decoration-none dropdown-toggle user-chip" href="#" data-bs-toggle="dropdown">
+          <span class="position-relative">
+            <i class="fa-solid fa-bell fa-lg"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:.58rem;">1</span>
+          </span>
+          <span class="d-none d-md-inline">M. Greevos</span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li><a class="dropdown-item" href="#">Settings</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#">Sign out</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+<div class="layout-wrap">
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="side-item active">
+      <i class="fa-solid fa-users-gear"></i>
+      <span>User management</span>
+    </div>
+    <div class="sub-item active"><i class="fa-solid fa-user-pen"></i><span>Edit Users</span></div>
+    <div class="sub-item"><i class="fa-solid fa-people-group"></i><span>Edit Workgroups</span></div>
+
+    <div class="side-item mt-2">
+      <i class="fa-solid fa-file-lines"></i><span>File management</span>
+    </div>
+    <div class="side-item">
+      <i class="fa-solid fa-sitemap"></i><span>Site management</span>
+    </div>
+    <div class="side-item">
+      <i class="fa-solid fa-bullhorn"></i><span>Marketing management</span>
+    </div>
+    <div class="side-item">
+      <i class="fa-solid fa-address-card"></i><span>CRM management</span>
+    </div>
+    <div class="side-item">
+      <i class="fa-solid fa-chart-column"></i><span>Critical Metrics</span>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="main-content">
+    <h1 class="page-title">User Management - Edit Users</h1>
+
+    <!-- Search Row -->
+    <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+      <div class="d-flex search-group">
+        <input type="text" id="searchInput" class="form-control search-input" placeholder="Search">
+        <button class="search-icon-btn px-3" id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+      <select id="fieldSelect" class="form-select field-select">
+        <option value="all">Search by field...</option>
+        <option value="id">ID</option>
+        <option value="firstName">First Name</option>
+        <option value="lastName">Last Name</option>
+        <option value="email">Username/Email</option>
+        <option value="group">Group</option>
+      </select>
+      <button class="btn btn-add-user text-white ms-sm-auto add-user-btn" id="addUserBtn">
+        <i class="fa-solid fa-plus me-1"></i>Add User
+      </button>
+    </div>
+
+    <!-- Filters Row -->
+    <div class="d-flex align-items-center gap-3 mb-3 filters-toolbar">
+      <button class="btn btn-filters" id="toggleFiltersBtn" type="button">
+        <i class="fa-solid fa-filter me-1"></i>Filters
+      </button>
+      <a href="#" class="clear-filters-link" id="clearFiltersBtn">Clear Filters</a>
+    </div>
+
+    <!-- Filters Panel -->
+    <div class="filters-panel filters-grid" id="filtersPanel">
+      <div>
+        <div class="filter-label">Status</div>
+        <select class="form-select" id="statusFilter">
+          <option value="All">All</option>
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+        </select>
+      </div>
+      <div>
+        <div class="filter-label">Region</div>
+        <select class="form-select" id="regionFilter">
+          <option value="All">All</option>
+        </select>
+      </div>
+      <div>
+        <div class="filter-label">Division</div>
+        <select class="form-select" id="divisionFilter">
+          <option value="All">All</option>
+        </select>
+      </div>
+      <div>
+        <div class="filter-label">Group</div>
+        <select class="form-select" id="groupFilter">
+          <option value="All">All</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-card">
+      <div class="table-responsive">
+        <table class="table user-table mb-0">
+          <thead>
+            <tr>
+              <th data-key="id">ID <i class="fa-solid fa-sort"></i></th>
+              <th data-key="firstName">First Name <i class="fa-solid fa-sort"></i></th>
+              <th data-key="lastName">Last Name <i class="fa-solid fa-sort"></i></th>
+              <th data-key="email">Username/Email <i class="fa-solid fa-sort"></i></th>
+              <th data-key="group">Group <i class="fa-solid fa-sort"></i></th>
+              <th data-key="division">Division <i class="fa-solid fa-sort"></i></th>
+              <th data-key="region">Region <i class="fa-solid fa-sort"></i></th>
+              <th data-key="userType">User Type <i class="fa-solid fa-sort"></i></th>
+              <th data-key="submitted">Submitted Date <i class="fa-solid fa-sort"></i></th>
+              <th data-key="enabled">Enabled Date <i class="fa-solid fa-sort"></i></th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="userTableBody"></tbody>
+        </table>
+      </div>
+      <div id="emptyState" class="empty-state d-none">
+        <i class="fa-solid fa-user-slash fa-2x mb-2"></i>
+        <div>No users match your search or filters.</div>
+      </div>
+      <div class="table-footer">
+        <div class="entries-text" id="entriesText">Showing 1 to 10 of 10 entries</div>
+        <nav aria-label="User table pagination">
+          <ul class="pagination mb-0" id="pagination"></ul>
+        </nav>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Edit User Modal -->
+<div class="modal fade" id="editUserModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="editUserForm">
+          <input type="hidden" id="editId">
+          <div class="row g-3">
+            <div class="col-12 col-sm-6">
+              <label class="form-label">First Name</label>
+              <input class="form-control" id="editFirstName" required>
+            </div>
+            <div class="col-12 col-sm-6">
+              <label class="form-label">Last Name</label>
+              <input class="form-control" id="editLastName" required>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Username/Email</label>
+              <input class="form-control" id="editEmail" required>
+            </div>
+            <div class="col-12 col-sm-6">
+              <label class="form-label">Group</label>
+              <select class="form-select" id="editGroup">
+                <option>Admin</option>
+                <option>Licensed</option>
+                <option>Forward</option>
+                <option>Recruiter</option>
+              </select>
+            </div>
+            <div class="col-12 col-sm-6">
+              <label class="form-label">Region</label>
+              <input class="form-control" id="editRegion">
+            </div>
+            <div class="col-12 col-sm-6">
+              <label class="form-label">Division</label>
+              <input class="form-control" id="editDivision">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-add-user text-white" id="saveUserBtn">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add User Modal -->
+<div class="modal fade" id="addUserModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="addUserForm">
+          <div class="row g-3">
+            <div class="col-12 col-sm-6">
+              <label class="form-label">First Name</label>
+              <input class="form-control" id="addFirstName" required>
+            </div>
+            <div class="col-12 col-sm-6">
+              <label class="form-label">Last Name</label>
+              <input class="form-control" id="addLastName" required>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Username/Email</label>
+              <input class="form-control" id="addEmail" required>
+            </div>
+            <div class="col-12 col-sm-6">
+              <label class="form-label">Group</label>
+              <select class="form-select" id="addGroup">
+                <option>Admin</option>
+                <option>Licensed</option>
+                <option>Forward</option>
+                <option>Recruiter</option>
+              </select>
+            </div>
+            <div class="col-12 col-sm-6">
+              <label class="form-label">Region</label>
+              <input class="form-control" id="addRegion" placeholder="e.g. NY">
+            </div>
+            <div class="col-12 col-sm-6">
+              <label class="form-label">Division</label>
+              <input class="form-control" id="addDivision" placeholder="e.g. Corporate">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-add-user text-white" id="createUserBtn">Add User</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Deactivate confirm modal -->
+<div class="modal fade" id="deactivateModal" tabindex="-1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to deactivate <strong id="deactivateName"></strong>?
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-danger" id="confirmDeactivateBtn">Deactivate</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Filters Modal (phones) -->
+<div class="modal fade" id="filtersModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Filters</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="filters-grid">
+          <div>
+            <div class="filter-label">Status</div>
+            <select class="form-select" id="mStatusFilter">
+              <option value="All">All</option>
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+          <div>
+            <div class="filter-label">Region</div>
+            <select class="form-select" id="mRegionFilter">
+              <option value="All">All</option>
+            </select>
+          </div>
+          <div>
+            <div class="filter-label">Division</div>
+            <select class="form-select" id="mDivisionFilter">
+              <option value="All">All</option>
+            </select>
+          </div>
+          <div>
+            <div class="filter-label">Group</div>
+            <select class="form-select" id="mGroupFilter">
+              <option value="All">All</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-filters" id="mApplyFiltersBtn">Apply</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index:1080">
+  <div id="mainToast" class="toast align-items-center text-white bg-dark border-0" role="alert">
+    <div class="d-flex">
+      <div class="toast-body" id="toastBody">Done.</div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile Floating Action Menu (phones only) -->
+<div class="fab d-sm-none" id="fab">
+  <div class="fab-actions" id="fabActions">
+    <button type="button" class="fab-action" id="fabClearFilters" aria-label="Clear Filters" title="Clear Filters">
+      <i class="fa-solid fa-filter-circle-xmark"></i>
+    </button>
+    <button type="button" class="fab-action" id="fabFilters" aria-label="Filters" title="Filters">
+      <i class="fa-solid fa-filter"></i>
+    </button>
+    <button type="button" class="fab-action" id="fabAddUser" aria-label="Add User" title="Add User">
+      <i class="fa-solid fa-user-plus"></i>
+    </button>
+  </div>
+  <button type="button" class="fab-toggle" id="fabToggle" aria-label="Toggle menu">
+    <i class="fa-solid fa-plus"></i>
+  </button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
