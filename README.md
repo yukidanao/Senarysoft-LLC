@@ -47,6 +47,7 @@ Then visit `http://localhost:8080`.
 - User `id` values are treated as unique string keys (e.g. `"0513"`).
 - No authentication or role-based permissions are implemented; the navbar "M. Greevos" user chip, module links, and search button are decorative placeholders.
 - Deactivating a user clears its `enabled` date and sets status to `Inactive`.
+- The Add User and Edit User forms do not include a User Type field; User Type is not editable and renders as empty (`—`) in the table for all mocked users.
 
 ## UI/UX Changes
 
