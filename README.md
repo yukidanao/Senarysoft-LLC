@@ -48,18 +48,13 @@ Then visit `http://localhost:8080`.
 - No authentication or role-based permissions are implemented; the navbar "M. Greevos" user chip, module links, and search button are decorative placeholders.
 - Deactivating a user clears its `enabled` date and sets status to `Inactive`.
 
-## UI/UX changes
+## UI/UX Changes
 
-- **File separation:** moved all inline `<style>` and `<script>` blocks into `styles.css` and `app.js`.
-- **Navbar:** module links are now evenly spread across the bar, the active "Home" pill is wider, the profile icon was replaced with a notification bell showing a "1" badge.
-- **Search & filters toolbar:** restructured into two rows — (1) Search + "Search by field" + Add User, (2) Filters + Clear Filters — so nothing feels cramped on laptops.
-- **Filters panel:** uses a CSS grid so it matches the table width exactly (previously Bootstrap row/col negative margins made it wider).
-- **Desktop:** sidebar is fixed and always visible.
-- **Tablets (<992px):** sidebar becomes an off-canvas drawer opened by the hamburger button, behind a backdrop.
-- **Phones (<576px):**
-  - Search + field select go full width.
-  - Add User, Filters, and Clear Filters move into a floating action button (FAB) at the bottom-right corner.
-  - Filter options open in a modal instead of the inline panel.
-  - Edit/Add modal form fields stack into a single column; table action icons enlarge for touch.
-- **Bug fix:** fixed pagination where the active page number blended into its background (missing `color:#fff` on the active state).
-- **Bug fix:** fixed the "Home" link being clipped on laptop widths (centered flexbox overflow clipping).
+1. **Navbar search icon** — Replaced the button with a smaller, modern search icon inside a circular container.
+2. **Background** — Removed the light blue background that visually detached the main body from the navbar; the page now looks more modern and cohesive.
+3. **Side menu** — Reduced the size of the icons and text for better size harmony.
+4. **Filter options** — Redesigned to fit in a single row in their own container, with the dropdowns equally wide so they span the full width of the table.
+5. **Table** — Adopted a more modern table style, added color coding to the Group column, and applied proper colors to the action buttons.
+6. **Add User button** — Switched to a plain light green, removing the emerald-style look so it matches the color and style of the Filters button.
+7. **Sorting** — Added click-to-sort on every table column.
+8. **Floating tool** — On smaller devices, a floating action button opens options for adding a user, applying filters, and clearing filters.
